@@ -28,6 +28,18 @@ app.get('/api/persons', (request, response) => {
     response.json(persons)
     })
 
+    app.get('/api/info', (request, response) => {
+        const count = persons.length;
+        const Time = new Date();
+        let msg = `Phonebook has info for ${count} people<br><br>${Time}`;
+        response.send(msg);
+        })
+
+    app.delete('/api/persons/:id', (request, response) => {
+        const id = request.params.id
+        persons = persons.filter(note => note.id !== id)  
+        response.status(204).end()
+          })
 
 app.get('/api/persons/:id', (request, response) => {
     const id = request.params.id
